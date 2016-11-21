@@ -36,14 +36,14 @@ use Cake\Core\Configure;
                         <?php
                         echo $this->Form->input('category_id', ['options' => $categories, 'empty' => __('Select')]);
                         echo $this->Form->input('name');
-                        echo $this->Form->input('code',['class'=>'form-control readonly']);
-                        echo $this->Form->input('pack_size',['type'=>'text']);
-                        echo $this->Form->input('unit',['options'=>Configure::read('pack_size_units')]);
-                        echo $this->Form->input('generic_name',['type'=>'text']);
-                        echo $this->Form->input('box_size',['type'=>'text']);
-                        echo $this->Form->input('cash_sales_price',['type'=>'text']);
-                        echo $this->Form->input('credit_sales_price',['type'=>'text']);
-                        echo $this->Form->input('retail_price',['type'=>'text']);
+                        echo $this->Form->input('code', ['class' => 'form-control readonly']);
+                        //echo $this->Form->input('pack_size',['type'=>'text', 'class'=>'form-control numbersOnly']);
+                        //echo $this->Form->input('unit',['options'=>Configure::read('pack_size_units')]);
+                        echo $this->Form->input('generic_name', ['type' => 'text']);
+                        //echo $this->Form->input('box_size',['type'=>'text', 'class'=>'form-control numbersOnly']);
+                        //echo $this->Form->input('cash_sales_price',['type'=>'text', 'class'=>'form-control numbersOnly']);
+                        //echo $this->Form->input('credit_sales_price',['type'=>'text', 'class'=>'form-control numbersOnly']);
+                        // echo $this->Form->input('retail_price',['type'=>'text', 'class'=>'form-control numbersOnly']);
                         echo $this->Form->input('status', ['options' => Configure::read('status_options')]);
                         ?>
                         <?= $this->Form->button(__('Submit'), ['class' => 'btn blue pull-right', 'style' => 'margin-top:20px']) ?>
@@ -55,3 +55,10 @@ use Cake\Core\Configure;
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $(document).on("keyup", ".numbersOnly", function (event) {
+            this.value = this.value.replace(/[^0-9\.]/g, '');
+        });
+    });
+</script>

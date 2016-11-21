@@ -34,9 +34,6 @@ $status = \Cake\Core\Configure::read('status_options');
                             <th><?= __('Category') ?></th>
                             <th><?= __('Name') ?></th>
                             <th><?= __('Code') ?></th>
-                            <th><?= __('Pack Size') ?></th>
-                            <th><?= __('Unit') ?></th>
-                            <th><?= __('Box Size') ?></th>
                             <th><?= __('Actions') ?></th>
                         </tr>
                         </thead>
@@ -51,9 +48,6 @@ $status = \Cake\Core\Configure::read('status_options');
                                                 ->id]) : '' ?></td>
                                 <td><?= h($item->name) ?></td>
                                 <td><?= h($item->code) ?></td>
-                                <td><?= $this->Number->format($item->pack_size) ?></td>
-                                <td><?= $this->Number->format($item->unit) ?></td>
-                                <td><?= $this->Number->format($item->box_size) ?></td>
                                 <td class="actions">
                                     <?php
                                     echo $this->Html->link(__('View'), ['action' => 'view', $item->id], ['class' => 'btn btn-sm btn-info']);
