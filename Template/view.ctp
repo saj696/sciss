@@ -1,5 +1,6 @@
 <?php
 $status = \Cake\Core\Configure::read('status_options');
+use App\View\Helper\MyHelper;
 ?>
 
 <div class="page-bar">
@@ -10,10 +11,10 @@ $status = \Cake\Core\Configure::read('status_options');
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <?= $this->Html->link(__('Items'), ['action' => 'index']) ?>
+            <?= $this->Html->link(__('Item Units'), ['action' => 'index']) ?>
             <i class="fa fa-angle-right"></i>
         </li>
-        <li><?= __('View Item') ?></li>
+        <li><?= __('View Item Unit') ?></li>
     </ul>
 </div>
 
@@ -24,7 +25,7 @@ $status = \Cake\Core\Configure::read('status_options');
         <div class="portlet box blue-hoki">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-picture-o fa-lg"></i><?= __('Item Details') ?>
+                    <i class="fa fa-picture-o fa-lg"></i><?= __('Item Unit Details') ?>
                 </div>
                 <div class="tools">
                     <?= $this->Html->link(__('Back'), ['action' => 'index'], ['class' => 'btn btn-sm btn-success']); ?>
@@ -34,42 +35,58 @@ $status = \Cake\Core\Configure::read('status_options');
                 <div class="table-scrollable">
                     <table class="table table-bordered table-hover">
                         <tr>
-                            <th><?= __('Category') ?></th>
-                            <td><?= $item->has('category') ? $this->Html->link($item->category->name, ['controller' => 'Categories', 'action' => 'view', $item->category->id]) : '' ?></td>
+                            <th><?= __('Unit Name') ?></th>
+                            <td><?= h($itemUnit->unit_name) ?></td>
                         </tr>
                         <tr>
-                            <th><?= __('Name') ?></th>
-                            <td><?= h($item->name) ?></td>
+                            <th><?= __('Unit Type') ?></th>
+                            <td><?= h($itemUnit->unit_type) ?></td>
                         </tr>
+
                         <tr>
-                            <th><?= __('Code') ?></th>
-                            <td><?= h($item->code) ?></td>
+                            <th><?= __('Unit Level') ?></th>
+                            <td><?= $this->Number->format($itemUnit->unit_level) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th><?= __('Constituent Unit Id') ?></th>
+                            <td><?= $this->Number->format($itemUnit->constituent_unit_id) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th><?= __('Unit Size') ?></th>
+                            <td><?= $this->Number->format($itemUnit->unit_size) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th><?= __('Converted Quantity') ?></th>
+                            <td><?= $this->Number->format($itemUnit->converted_quantity) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th><?= __('Created By') ?></th>
+                            <td><?= $this->Number->format($itemUnit->created_by) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th><?= __('Created Date') ?></th>
+                            <td><?= $this->System->display_date($itemUnit->created_date) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th><?= __('Updated By') ?></th>
+                            <td><?= $this->Number->format($itemUnit->updated_by) ?></td>
+                        </tr>
+
+                        <tr>
+                            <th><?= __('Updated Date') ?></th>
+                            <td><?= $this->System->display_date($itemUnit->updated_date) ?></td>
                         </tr>
 
 
                         <tr>
                             <th><?= __('Status') ?></th>
-                            <td><?= __($status[$item->status]) ?></td>
-                        </tr>
-
-                        <tr>
-                            <th><?= __('Created By') ?></th>
-                            <td><?= $this->Number->format($item->created_by) ?></td>
-                        </tr>
-
-                        <tr>
-                            <th><?= __('Created Date') ?></th>
-                            <td><?= $this->Number->format($item->created_date) ?></td>
-                        </tr>
-
-                        <tr>
-                            <th><?= __('Updated By') ?></th>
-                            <td><?= $this->Number->format($item->updated_by) ?></td>
-                        </tr>
-
-                        <tr>
-                            <th><?= __('Updated Date') ?></th>
-                            <td><?= $this->Number->format($item->updated_date) ?></td>
+                            <td><?= __($status[$itemUnit->status]) ?></td>
                         </tr>
                     </table>
                 </div>

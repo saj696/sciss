@@ -10,86 +10,78 @@ use Cake\Core\Configure;
             <i class="fa fa-angle-right"></i>
         </li>
         <li>
-            <?= $this->Html->link(__('Items'), ['action' => 'index']) ?>
+            <?= $this->Html->link(__('Item Units'), ['action' => 'index']) ?>
             <i class="fa fa-angle-right"></i>
         </li>
-        <li><?= __('New Item') ?></li>
+        <li><?= __('New Item Unit') ?></li>
+
     </ul>
 </div>
 
+
 <div class="row">
     <div class="col-md-12">
+        <!-- BEGIN BORDERED TABLE PORTLET-->
         <div class="portlet box blue-hoki">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-plus-square-o fa-lg"></i><?= __('Add New Item') ?>
+                    <i class="fa fa-plus-square-o fa-lg"></i><?= __('Add New Item Unit') ?>
                 </div>
                 <div class="tools">
                     <?= $this->Html->link(__('Back'), ['action' => 'index'], ['class' => 'btn btn-sm btn-success']); ?>
                 </div>
-            </div>
 
+            </div>
             <div class="portlet-body">
-                <?= $this->Form->create($item, ['class' => 'form-horizontal', 'role' => 'form']) ?>
+                <?= $this->Form->create($itemUnit, ['class' => 'form-horizontal', 'role' => 'form']) ?>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <?php
-                        echo $this->Form->input('category_id', ['options' => $categories, 'class'=>'form-control category', 'empty' => __('Select'),'required'=>'required']);
+                        echo $this->Form->input('unit_level', ['options' => Configure::read('unit_levels')]);
+                        echo $this->Form->input('constituent_unit_id', ['label' => 'Constituent Level', 'required' => true]);
+                        echo $this->Form->input('unit_name');
+                        echo $this->Form->input('unit_size');
+                        echo $this->Form->input('unit_type', ['options' => Configure::read('pack_size_units')]);
                         ?>
-                        <div class="subDiv"></div>
-                        <?php
-                        echo $this->Form->input('name');
-                        echo $this->Form->input('code',['class'=>'form-control codeItem','readonly']);
-                        //echo $this->Form->input('pack_size',['type'=>'text', 'class'=>'form-control numbersOnly']);
-                       // echo $this->Form->input('unit', ['options'=>Configure::read('pack_size_units'), 'empty'=>'Select', 'required'=>'required']);
-                        echo $this->Form->input('generic_name');
-                        //echo $this->Form->input('box_size',['type'=>'text', 'class'=>'form-control numbersOnly']);
-                        //echo $this->Form->input('cash_sales_price',['type'=>'text', 'class'=>'form-control numbersOnly']);
-                        //echo $this->Form->input('credit_sales_price',['type'=>'text', 'class'=>'form-control numbersOnly']);
-                        //echo $this->Form->input('retail_price',['type'=>'text', 'class'=>'form-control numbersOnly']);
-                        ?>
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn blue pull-right', 'style' => 'margin-top:20px']) ?>
+                        <?= $this->Form->button(__('Submit'), ['class' => 'btn blue center-block', 'style' => 'margin-top:20px']) ?>
                     </div>
                 </div>
                 <?= $this->Form->end() ?>
             </div>
         </div>
+        <!-- END BORDERED TABLE PORTLET-->
     </div>
 </div>
 
 <script>
-    $(document).ready(function(){
-        $(document).on("keyup", ".numbersOnly", function(event) {
-            this.value = this.value.replace(/[^0-9\.]/g,'');
-        });
+    $(document).ready(function () {
 
-        $(document).on('change', '.category', function () {
+        $("#constituent-unit-id").hide();
+        $('label[for=constituent-unit-id], input#constituent-unit-id').hide();
+
+        $(document).on("change", "#unit-level", function () {
             var obj = $(this);
-            var category = obj.val();
-            obj.closest('.input').next().find('.category_div').remove();
+            var level = parseInt(obj.val());
+            $("#constituent-unit-id").show();
+            $('label[for=constituent-unit-id], input#constituent-unit-id').show();
             $.ajax({
                 type: 'POST',
-                url: '<?= $this->Url->build("/Items/ajax")?>',
-                data: {category: category},
+                url: '<?= $this->Url->build("/ItemUnits/ajax")?>',
+                data: {level: level},
                 success: function (data, status) {
-                    if (data) {
-                        $('.subDiv').append(data);
-                        obj.attr('name', '');
-                        obj.prevAll('.category').attr('name', '');
+                    if (level == 1) {
+                        obj.closest('.input').next().find('#constituent-unit-id').html('');
+                        obj.closest('.input').next().find('#constituent-unit-id').html('<option value="">Select</option>');
+                        obj.closest('.input').next().find('#constituent-unit-id').removeAttr('required');
+                    }
+                    else {
+                        obj.closest('.input').next().find('.col-sm-9').html('');
+                        obj.closest('.input').next().find('.col-sm-9').html(data);
                     }
                 }
             });
-            $('.codeItem').val('');
-            if(category!= ''){
-            $.ajax({
-                type: 'POST',
-                url: '<?= $this->Url->build("/Items/generateCode")?>',
-                data: {category: category},
-                success: function (data, status) {
-                    $('.codeItem').val(data);
-                }
-            });
-        }
+
+
         });
     });
 </script>
