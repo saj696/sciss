@@ -30,7 +30,7 @@ use Cake\Core\Configure;
             </div>
 
             <div class="portlet-body">
-                <?= $this->Form->create($customer, ['class' => 'form-horizontal', 'role' => 'form']) ?>
+                <?= $this->Form->create($customer, ['class' => 'form-horizontal', 'role' => 'form', 'type'=>'file']) ?>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <?php
@@ -38,40 +38,38 @@ use Cake\Core\Configure;
                         echo $this->Form->input('administrative_unit_id', ['label'=>'Unit', 'empty' => __('Select'),'class'=> 'form-control unit']);
                         echo $this->Form->input('prefix', ['options'=>$administrativeLevels, 'label'=>'Prefix Level', 'class'=>'form-control prefix', 'empty'=>'Select', 'required'=>'required']);
                         echo $this->Form->input('code', ['class'=>'form-control codeCustomer', 'readonly']);
-                        echo $this->Form->input('name');
+                        echo $this->Form->input('name_distributor',['label'=>'Distributor Name']);
+                        echo $this->Form->input('proprietor_name',['label'=>'Proprietor Name']);
                         echo $this->Form->input('address', ['rows'=>1]);
-                        echo $this->Form->input('proprietor');
-                        echo $this->Form->input('contact_person');
-                        //                        echo $this->Form->input('business_type');
-                        echo $this->Form->input('mobile');
-                        echo $this->Form->input('telephone');
+                        echo $this->Form->input('mobile_one',['label' => 'Mobile No','required'=>'required']);
+                        echo $this->Form->input('mobile_two',['label' => 'Alternative No']);
+                        echo $this->Form->input('phone');
                         echo $this->Form->input('email');
-                        //                        echo $this->Form->input('credit_limit');
-                                                echo $this->Form->input('credit_invoice_days');
-                                                echo $this->Form->input('cash_invoice_days');
-                        echo $this->Form->input('is_mango', ['type'=>'checkbox', 'value'=>1]);
-                        echo $this->Form->input('is_potato', ['type'=>'checkbox', 'value'=>1]);
-                        echo $this->Form->input('customer_type', ['options'=>Configure::read('customer_types')]);
-                        echo $this->Form->input('pesticide_no',['label'=> 'Pesticide License No']);
-                        echo $this->Form->input('pesticide_issue_date',['type'=>'text','class'=>'form-control datepicker','label'=>['text'=>__('Pesticide License Issue Date')]]);
-                        echo $this->Form->input('pesticide_end_date',['type'=>'text','class'=>'form-control datepicker','label'=>['text'=>__('Pesticide License End Date')]]);
-                        echo $this->Form->input('trade_no',['label'=> 'Trade License No']);
-                        echo $this->Form->input('trade_issue_date',['type'=>'text','class'=>'form-control datepicker','label'=>['text'=>__('Trade License Issue Date')]]);
-                        echo $this->Form->input('trade_end_date',['type'=>'text','class'=>'form-control datepicker','label'=>['text'=>__('Trade License End Date')]]);
+                        echo $this->Form->input('credit_limit',['type'=>'text']);
+                        echo $this->Form->input('business_starting_date',['type'=>'text','value'=>$customer['business_starting_date']?date('d-m-y',$customer['business_starting_date']):'','class'=>'form-control datepicker','label'=>['text'=>__('Business Starting Date')]]);
+                        echo $this->Form->input('credit_deposit_amount',['type' =>'Credit Deposit Scheme(CDS) Amount']);
+                        echo $this->Form->input('emergency_contact',['label'=>'Emergency Contact Number']);
+                        echo $this->Form->input('distributor_status', ['options'=>Configure::read('distributor_status')]);
+                        ?>
+                        <fieldset>
+                            <legend>Semester Cheque deposit info</legend>
+                            <?php
+                            echo $this->Form->input('name_bank');
+                            echo $this->Form->input('account_no');
+                            echo $this->Form->input('account_status', ['default'=>1, 'type'=>'radio', 'class'=>'radio-inline form-control', 'options' => [1=>'Active', 2=>'Inactive'], 'templates'=>['inputContainer' => '<div class="form-group input {{required}}">{{content}}</div>', 'label' =>'<label {{attrs}} class="col-sm-3 control-label text-right" >{{text}}</label>', 'input' => '<div class="col-sm-7 container_{{name}}"> <input {{attrs}} class="form-control" type="{{type}}" name="{{name}}"></div>']]);
+                            echo $this->Form->input('account_type', ['options'=>Configure::read('account_type'),'empty'=>__('Select')]);
+                            echo $this->Form->input('micr_cheque', ['default'=>1, 'type'=>'radio', 'class'=>'radio-inline form-control', 'options' => [1=>'Yes', 2=>'No'], 'templates'=>['inputContainer' => '<div class="form-group input {{required}}">{{content}}</div>', 'label' =>'<label {{attrs}} class="col-sm-3 control-label text-right" >{{text}}</label>', 'input' => '<div class="col-sm-7 container_{{name}}"> <input {{attrs}} class="form-control" type="{{type}}" name="{{name}}"></div>']]);
+                            echo $this->Form->input('cheque_date',['type'=>'text','value'=>$customer['cheque_date']?date('d-m-y',$customer['cheque_date']):'','class'=>'form-control datepicker','label'=>['text'=>__('Date')]]);
+                            echo $this->Form->input('cheque_amount',['type'=>'text']);
+                            echo $this->Form->input('distributor_feedback', ['rows'=>1]);
+                            ?>
+                        </fieldset>
+                        <?php
+                        echo $this->Form->input('nid');
                         echo $this->Form->input('picture_file', ['type'=>'file', 'label'=>'Photo']);
-//                        echo $this->Form->input('nid_file', ['type'=>'file', 'label'=>'NID']);
-//                        echo $this->Form->input('signature_file', ['type'=>'file', 'label'=>'Signature']);
-
                         echo $this->Form->input('distributor_paper_file', ['type'=>'file', 'label'=>'Distributor Paper']);
                         echo $this->Form->input('appointment_form_file', ['type'=>'file', 'label'=>'Appointment Form']);
                         echo $this->Form->input('appraisal_form_file', ['type'=>'file', 'label'=>'Appraisal Form']);
-
-                        echo $this->Form->input('customer_status', ['options'=>Configure::read('customer_status')]);
-                        echo $this->Form->input('check_and_other_documents', ['default'=>1, 'type'=>'radio', 'class'=>'radio-inline form-control', 'options' => [1=>'Yes', 2=>'No'], 'templates'=>['inputContainer' => '<div class="form-group input {{required}}">{{content}}</div>', 'label' =>'<label {{attrs}} class="col-sm-3 control-label text-right" >{{text}}</label>', 'input' => '<div class="col-sm-7 container_{{name}}"> <input {{attrs}} class="form-control" type="{{type}}" name="{{name}}"></div>']]);
-                        echo $this->Form->input('cds',['type'=> 'text']);
-                        echo $this->Form->input('dl_no',['type'=> 'text']);
-                        echo $this->Form->input('file_code',['type'=> 'text']);
-                        echo $this->Form->input('file_open', ['default'=>1, 'type'=>'radio', 'class'=>'radio-inline form-control', 'options' => [1=>'Yes', 2=>'No'], 'templates'=>['inputContainer' => '<div class="form-group input {{required}}">{{content}}</div>', 'label' =>'<label {{attrs}} class="col-sm-3 control-label text-right" >{{text}}</label>', 'input' => '<div class="col-sm-7 container_{{name}}"> <input {{attrs}} class="form-control" type="{{type}}" name="{{name}}"></div>']]);
                         ?>
                         <?= $this->Form->button(__('Submit'), ['class' => 'btn blue pull-right', 'style' => 'margin-top:20px']) ?>
                     </div>

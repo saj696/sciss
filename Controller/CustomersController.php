@@ -88,10 +88,8 @@ class CustomersController extends AppController
             $data['unit_global_id'] = $unitInfo['global_id'];
             $data['created_by'] = $user['id'];
             $data['created_date'] = $time;
-            $data['pesticide_issue_date'] = strtotime($data['pesticide_issue_date']);
-            $data['pesticide_end_date'] = strtotime($data['pesticide_end_date']);
-            $data['trade_issue_date'] = strtotime($data['trade_issue_date']);
-            $data['trade_end_date'] = strtotime($data['trade_end_date']);
+            $data['business_starting_date'] = strtotime($data['business_starting_date']);
+            $data['cheque_date'] = strtotime($data['cheque_date']);
             $data['status'] = 0;
             $customer = $this->Customers->patchEntity($customer, $data);
             if ($this->Customers->save($customer)) {
@@ -129,8 +127,11 @@ class CustomersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->data;
+
             $data['updated_by'] = $user['id'];
             $data['updated_date'] = $time;
+            $data['business_starting_date'] = strtotime($data['business_starting_date']);
+            $data['cheque_date'] = strtotime($data['cheque_date']);
             unset($data['prefix']);
             unset($data['code']);
             $customer = $this->Customers->patchEntity($customer, $data);

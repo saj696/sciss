@@ -33,9 +33,9 @@ $status = \Cake\Core\Configure::read('status_options');
                             <th><?= __('Sl. No.') ?></th>
                             <th><?= __('Unit') ?></th>
                             <th><?= __('Code') ?></th>
-                            <th><?= __('Name') ?></th>
-                            <th><?= __('Proprietor') ?></th>
-                            <th><?= __('Contact Person') ?></th>
+                            <th><?= __('Distributor Name') ?></th>
+                            <th><?= __('Proprietor Name') ?></th>
+                            <th><?= __('Mobile Number') ?></th>
                             <th><?= __('Status') ?></th>
                             <th><?= __('Actions') ?></th>
                         </tr>
@@ -50,9 +50,9 @@ $status = \Cake\Core\Configure::read('status_options');
                                             'action' => 'view', $customer->administrative_unit
                                                 ->id]) : '' ?></td>
                                 <td><?= h($customer->code) ?></td>
-                                <td><?= h($customer->name) ?></td>
-                                <td><?= h($customer->proprietor) ?></td>
-                                <td><?= h($customer->contact_person) ?></td>
+                                <td><?= h($customer->name_distributor) ?></td>
+                                <td><?= h($customer->proprietor_name) ?></td>
+                                <td><?= h($customer->mobile_one) ?></td>
                                 <td><?= ($customer->status)==0?"Not Approved":"Approved" ?></td>
                                 <td class="actions">
                                     <?php

@@ -34,20 +34,14 @@ class CustomersTable extends Table
                     'picture' => [
                         'path' => 'u_load/customer/photo/:md5'
                     ],
-                    'signature' => [
-                        'path' => 'u_load/customer/signature/:md5'
-                    ],
-                    'nid' => [
-                        'path' => 'u_load/customer/nid/:md5'
-                    ],
                     'distributor_paper' => [
-                        'path' => 'u_load/customer/distributor_paper/:md5'
-                    ],
-                    'appraisal_form' => [
-                        'path' => 'u_load/customer/appraisal_form/:md5'
+                        'path' => 'u_load/customer/distributor/:md5'
                     ],
                     'appointment_form' => [
-                        'path' => 'u_load/customer/appointment_form/:md5'
+                        'path' => 'u_load/customer/appointment/:md5'
+                    ],
+                    'appraisal_form' => [
+                        'path' => 'u_load/customer/appraisal/:md5'
                     ],
                 ]
             ]
@@ -71,83 +65,27 @@ class CustomersTable extends Table
             ->notEmpty('code');
             
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->requirePresence('name_distributor', 'create')
+            ->notEmpty('name_distributor');
             
         $validator
-            ->requirePresence('address','create')
-            ->notEmpty('address');
+            ->allowEmpty('proprietor_name');
+
+        $validator
+            ->allowEmpty('mobile_one');
             
         $validator
-            ->requirePresence('proprietor','create')
-            ->notEmpty('proprietor');
-            
-        $validator
-            ->requirePresence('contact_person','create')
-            ->notEmpty('contact_person');
-            
-//        $validator
-//            ->add('business_type', 'valid', ['rule' => 'numeric'])
-//            ->allowEmpty('business_type');
-            
-        $validator
-            ->allowEmpty('mobile');
-            
-        $validator
-            ->allowEmpty('telephone');
+            ->allowEmpty('phone');
             
         $validator
             ->add('email', 'valid', ['rule' => 'email'])
             ->allowEmpty('email');
-            
-//        $validator
-//            ->add('credit_limit', 'valid', ['rule' => 'numeric'])
-//            ->allowEmpty('credit_limit');
-            
-//        $validator
-//            ->add('credit_invoice_days', 'valid', ['rule' => 'numeric'])
-//            ->allowEmpty('credit_invoice_days');
-//
-//        $validator
-//            ->add('cash_invoice_days', 'valid', ['rule' => 'numeric'])
-//            ->allowEmpty('cash_invoice_days');
-
-//        $validator
-//            ->requirePresence('customer_status','create')
-//            ->notEmpty('customer_status');
-//
-//        $validator
-//            ->requirePresence('pesticide_no','create')
-//            ->notEmpty('pesticide_no');
-//
-//        $validator
-//            ->requirePresence('pesticide_issue_date','create')
-//            ->notEmpty('pesticide_issue_date');
-//
-//        $validator
-//            ->requirePresence('pesticide_end_date','create')
-//            ->notEmpty('pesticide_end_date');
-//
-//        $validator
-//            ->requirePresence('trade_no','create')
-//            ->notEmpty('trade_no');
-//
-//        $validator
-//            ->requirePresence('trade_issue_date','create')
-//            ->notEmpty('trade_issue_date');
-//
-//        $validator
-//            ->requirePresence('trade_end_date','create')
-//            ->notEmpty('trade_end_date');
 
         $validator
             ->allowEmpty('picture');
 
         $validator
             ->allowEmpty('nid');
-
-        $validator
-            ->allowEmpty('signature');
 
         return $validator;
     }
