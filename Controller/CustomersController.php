@@ -39,6 +39,8 @@ class CustomersController extends AppController
         $userAdminGlobal = $this->AdministrativeUnits->get($userAdmin);
         $limitStart = pow(2,(Configure::read('max_level_no')- $user['level_no']-1)*5);
         $limitEnd = pow(2,(Configure::read('max_level_no')- $user['level_no'])*5);
+        
+        //echo $limitStart.'  '.$limitEnd;exit; 
 
         $customers =  TableRegistry::get('customers')->query();
         $customers->contain('AdministrativeUnits');

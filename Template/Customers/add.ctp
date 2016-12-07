@@ -36,7 +36,7 @@ use Cake\Core\Configure;
                     <div class="col-md-7 col-md-offset-2">
                         <?php
                         echo $this->Form->input('level_no', ['options'=>$administrativeLevels, 'label'=>'Level', 'class'=>'form-control level', 'empty'=>'Select', 'required'=>'required']);
-                        echo $this->Form->input('administrative_unit_id', ['label'=>'Unit', 'empty' => __('Select'),'class'=> 'form-control unit']);
+                        echo $this->Form->input('administrative_unit_id', ['label'=>'Unit', 'required' => 'required','empty' => __('Select'),'class'=> 'form-control unit']);
                         echo $this->Form->input('prefix', ['options'=>$administrativeLevels, 'label'=>'Prefix Level', 'class'=>'form-control prefix', 'empty'=>'Select', 'required'=>'required']);
                         echo $this->Form->input('code', ['class'=>'form-control codeCustomer', 'readonly']);
                         echo $this->Form->input('name_distributor',['label'=>'Distributor Name']);

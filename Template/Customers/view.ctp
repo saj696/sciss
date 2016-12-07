@@ -43,7 +43,7 @@ $status = \Cake\Core\Configure::read('status_options');
                         </tr>
                         <tr>
                             <th><?= __('name_distributor') ?></th>
-                            <td><?= h($customer->name_distributor) ?></td>
+                            <td><?= h($customer->name) ?></td>
                         </tr>
                         <tr>
                             <th><?= __('Proprietor Name') ?></th>
